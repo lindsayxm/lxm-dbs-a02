@@ -1,27 +1,10 @@
-/* Papercut Tickets, built on the Storywriter design system (see ../design-systems/ds.css).
-   The pressed-score background comes from the system. */
+/* Papercut Tickets, built on the Storywriter design system (see ../design-systems/ds.css). */
 
 .site {
   --barcode-paper: transparent;
   --barcode-ink: var(--text);
 }
 
-/* The score from the mood board, pressed very faintly into the slate. Site only.
-   Landscape on wide screens (the two circles side by side), portrait on tall ones. */
-.site::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  background: url("/img/score-pressed-landscape.webp") center / cover no-repeat;
-  opacity: 0.34;
-  pointer-events: none;
-}
-@media (max-aspect-ratio: 1 / 1) {
-  .site::before {
-    background-image: url("/img/score-pressed-portrait.webp");
-  }
-}
 /* a warm wash of gold behind the ticket, the focal point */
 .site::after {
   content: "";
