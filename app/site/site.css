@@ -453,7 +453,7 @@
 /* a warning under the link panel: nothing is stored, so the band has to keep the link */
 .site .save-note {
   margin-top: 14px;
-  color: var(--error); /* the same warning colour as the error messages */
+  color: var(--accent); /* the gold accent, #D3AE5B */
   font-family: var(--f-label);
   font-weight: 600;
   font-size: 13px;
