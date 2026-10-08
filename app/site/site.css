@@ -1,0 +1,578 @@
+/* Papercut Tickets, built on the Storywriter design system (see ../design-systems/ds.css).
+   The pressed-score background comes from the system. */
+
+.site {
+  --barcode-paper: transparent;
+  --barcode-ink: var(--text);
+}
+
+/* The score from the mood board, pressed very faintly into the slate. Site only.
+   Landscape on wide screens (the two circles side by side), portrait on tall ones. */
+.site::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: url("/img/score-pressed-landscape.webp") center / cover no-repeat;
+  opacity: 0.34;
+  pointer-events: none;
+}
+@media (max-aspect-ratio: 1 / 1) {
+  .site::before {
+    background-image: url("/img/score-pressed-portrait.webp");
+  }
+}
+/* a warm wash of gold behind the ticket, the focal point */
+.site::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(900px 560px at 72% 36%, color-mix(in srgb, var(--accent) 10%, transparent), transparent 70%);
+  pointer-events: none;
+}
+
+/* the page runs full height so the footer sits at the bottom even when the content is short */
+.ds.site > .wrap {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding-bottom: 64px; /* breathing room under the footer line */
+}
+
+/* footer: small muted line, centred across the content column */
+.site .site-foot {
+  margin-top: auto;
+  padding-top: 72px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between; /* first phrase on the left edge of the column, last on the right edge */
+  gap: 8px 36px;
+  color: #79838b; /* a step down from muted text: quiet, but still 4.6:1 on the page */
+  font-family: var(--f-label);
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+}
+.site .site-foot > span {
+  margin-right: -0.26em; /* cancels the trailing letter-spacing so the ends meet the column edges */
+  white-space: nowrap;
+}
+.site .site-foot .stars {
+  display: inline-flex;
+  gap: 5px;
+  margin-left: 0.9em;
+  vertical-align: -1px;
+}
+.site .site-foot .stars svg {
+  width: 12px;
+  height: 12px;
+  fill: currentColor;
+}
+@media (max-width: 719px) {
+  .site .site-foot {
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+  }
+  .site .site-foot > span {
+    margin-right: 0;
+  }
+}
+
+/* section titles: the big headings of the page */
+.ds.site .sec-title {
+  gap: 16px;
+  margin-bottom: 28px;
+  padding-bottom: 14px;
+  font-size: clamp(32px, 4.2vw, 52px);
+  letter-spacing: 0.06em;
+}
+
+
+/* page layout */
+.site .site-grid {
+  margin-top: 56px;
+  display: grid;
+  gap: 56px;
+}
+@media (min-width: 1024px) {
+  .site .site-grid {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: 64px;
+    align-items: start;
+  }
+  .site .site-preview {
+    position: sticky;
+    top: 24px;
+  }
+}
+.site .site-form,
+.site .site-preview {
+  min-width: 0;
+}
+
+/* image upload */
+.site .image-field {
+  display: grid;
+  gap: 8px;
+  justify-items: start;
+}
+.site .image-field .upload {
+  width: 100%;
+}
+.site .upload-status {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+/* form */
+.site .form-stack {
+  display: grid;
+  gap: 24px;
+}
+.site .field {
+  color-scheme: dark;
+}
+.site .field[aria-invalid="true"] {
+  border-color: var(--error);
+}
+.site .field[aria-invalid="true"]:focus-visible {
+  border-color: var(--error);
+  box-shadow: 0 0 0 1px var(--error), 0 0 12px 1px color-mix(in srgb, var(--error) 50%, transparent),
+    0 0 30px 4px color-mix(in srgb, var(--error) 18%, transparent);
+}
+.site .field-error {
+  color: var(--error);
+  font-size: 13px;
+  line-height: 1.4;
+}
+.site .field-error::before {
+  content: "! ";
+  font-weight: 700;
+}
+.site .acts {
+  display: grid;
+  gap: 10px;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  min-width: 0;
+}
+.site .acts legend {
+  padding: 0;
+  margin-bottom: 6px;
+}
+.site .hint {
+  color: var(--muted);
+  text-transform: none;
+  letter-spacing: 0.02em;
+}
+.site .act-row {
+  display: flex;
+  gap: 8px;
+}
+.site .act-row .field {
+  flex: 1;
+  min-width: 0;
+}
+.site .btn-icon {
+  flex: none;
+  width: 44px;
+  min-height: 44px;
+  padding: 0;
+}
+.site .act-add {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.site .when-row {
+  display: grid;
+  align-items: start;
+  gap: 20px;
+  grid-template-columns: minmax(0, 1fr);
+}
+@media (min-width: 480px) {
+  .site .when-row {
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 1.2fr) minmax(0, 0.7fr);
+    gap: 12px;
+  }
+}
+.site .when-row .field {
+  min-width: 0;
+  padding-inline: 10px;
+}
+
+/* ticket: a wider stub so the barcode is big enough to scan */
+.site .ticket {
+  --stub: 230px;
+}
+.site .ticket {
+  box-shadow: 0 0 70px -18px color-mix(in srgb, var(--accent) 38%, transparent);
+}
+.ds.site .ticket-title {
+  overflow-wrap: anywhere;
+  font-size: clamp(22px, 2.4vw, 30px);
+}
+.site .ticket-main {
+  display: flex;
+  flex-direction: column;
+  min-height: 330px; /* room for all five subtitle rows without the ticket jumping as you type */
+}
+.site .ticket-meta {
+  margin-top: auto; /* date, time and price sit at the bottom of the ticket */
+  padding-top: 16px;
+}
+/* the whole stub (barcode, number, note) is one group, centred vertically on the ticket */
+.site .ticket-stub {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--s-4);
+}
+.site .stub-foot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 26px;
+  width: 100%;
+  padding-top: 10px;
+}
+.site .ticket-note {
+  display: grid;
+  gap: 2px;
+  text-align: center;
+  text-transform: uppercase;
+  font-family: var(--f-label);
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  line-height: 1.5;
+}
+.site .ticket-note span {
+  display: block;
+}
+.site .barcode-plate {
+  width: 100%;
+  max-width: 260px;
+  padding: 10px 6px;
+  background: var(--barcode-paper);
+}
+.site .barcode-svg {
+  display: block;
+  width: 100%;
+  height: 64px;
+}
+.site .ticket-stub .t-label {
+  color: var(--text);
+}
+
+/* sell + states */
+.site .actions {
+  margin-top: 24px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px 24px;
+  flex-wrap: wrap;
+}
+.site .mode-toggle {
+  margin-left: auto; /* stays at the lower right, across from Sell Tickets, even once that button is gone */
+  min-height: 68px;
+  align-items: center;
+}
+.site .sell {
+  display: grid;
+  gap: 10px;
+  justify-items: start;
+}
+.ds.site .btn-lg {
+  min-height: 72px;
+  padding: 0 var(--s-6);
+  font-size: 26px;
+  box-shadow: 0 0 24px -6px color-mix(in srgb, var(--accent) 45%, transparent);
+}
+.ds.site .btn-lg:hover {
+  box-shadow: 0 0 32px 0 color-mix(in srgb, var(--accent) 50%, transparent);
+}
+.ds.site .btn-lg:focus-visible {
+  box-shadow: var(--focus-glow);
+}
+
+/* Sell Tickets: a bold label on gold, with a photographed verdigris and rust patina laid over it at 65%.
+   The image sits on its own layer behind the label so the hover and pressed colours still come from the
+   system underneath and the text stays fully opaque. */
+.ds.site .btn-lg {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  font-family: var(--f-heading); /* Cal Sans, in capitals */
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  -webkit-text-stroke: 0.8px currentColor; /* Cal Sans has one weight, so a hairline stroke makes it a touch heavier */
+  /* one simple light-gold glow behind the letters */
+  text-shadow: 0 0 8px rgb(250 232 165);
+}
+.ds.site .btn-lg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: url("/img/button-patina.webp") center / cover no-repeat;
+  opacity: 0.65;
+  pointer-events: none;
+}
+.ds.site .btn-lg:disabled::before {
+  display: none; /* while loading the button is an outline, so no patina */
+}
+.site .sell-note {
+  color: var(--muted);
+  font-size: 13px;
+}
+.site .banner {
+  margin-top: 20px;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  padding: var(--s-4);
+  background: var(--surface);
+  border: 1px solid var(--border);
+}
+.site .banner > svg {
+  flex: none;
+  margin-top: 2px;
+}
+.site .banner > div {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+  flex: 1;
+}
+.site .banner p,
+.site .banner li {
+  color: var(--muted);
+  font-size: 14px;
+}
+.site .banner li::before {
+  content: "– ";
+}
+.site .banner.loading {
+  border-color: var(--accent);
+}
+.site .banner.loading > svg {
+  color: var(--accent);
+}
+.site .banner.error {
+  border-color: var(--error);
+}
+.site .banner.error > svg,
+.site .banner.error .ui-title {
+  color: var(--error);
+}
+.site .banner.success {
+  border-color: var(--signal);
+}
+.site .banner.success > svg {
+  color: var(--signal);
+}
+.site .banner .ui-title {
+  font-size: 18px;
+}
+.site .link-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 6px;
+}
+.site .link-row .field {
+  flex: 1 1 240px;
+  min-width: 0;
+  font-size: 13px;
+}
+.site .demo-note {
+  font-size: 12px;
+}
+
+/* Venmo handle: a fixed @ in front of the field */
+.site .handle {
+  position: relative;
+  display: block;
+}
+.site .handle-at {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--muted);
+  pointer-events: none;
+}
+.site .handle .field {
+  padding-left: 34px;
+}
+
+@media (max-width: 639px) {
+  .site .ticket-main {
+    min-height: 280px;
+  }
+}
+
+/* Light ticket: the same ticket printed on ivory stock. The page stays dark. Only the colours the
+   ticket reads are redefined, so every ticket rule above keeps working. */
+.site .ticket[data-mode="light"] {
+  --surface: #f1ecde;
+  --text: #15191d;
+  --muted: #4c535b;
+  --border: #c9c1ac;
+  --barcode-ink: #15191d;
+  --barcode-paper: transparent;
+  --art-shadow: rgb(21 25 29 / 0.3);
+  --art-light: rgb(255 255 255 / 0.9);
+  --art-base: rgb(21 25 29 / 0.07);
+  color: var(--text);
+  background-color: var(--surface);
+  background-image: none;
+  isolation: isolate;
+  transition: background-color 0.2s;
+}
+/* a photographed cotton-paper texture laid over the ivory, the same way the patina sits on the Sell button.
+   Multiplied, so it adds tooth and soft mottling without bleaching the cream. Light ticket only. */
+.site .ticket .paper {
+  display: none;
+}
+.site .ticket[data-mode="light"] .paper {
+  display: block;
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: url("/img/paper-texture.webp") center / cover no-repeat;
+  mix-blend-mode: multiply;
+  opacity: 0.9;
+  pointer-events: none;
+}
+.site .ticket[data-mode="light"] .ticket-subs {
+  color: var(--muted);
+}
+.site .ticket[data-mode="light"] .ticket-stub .t-label,
+.site .ticket[data-mode="light"] .ticket-note {
+  color: var(--text);
+}
+
+/* top row: just THE HUB, out of the way at the right */
+.site .site-top {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* a warning under the link panel: nothing is stored, so the band has to keep the link */
+.site .save-note {
+  margin-top: 14px;
+  color: var(--error); /* the same warning colour as the error messages */
+  font-family: var(--f-label);
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  line-height: 1.5;
+}
+
+/* ADMIT ONE and the DATE, TIME and PRICE headers are the ticket's accent ink: the same warning colour as the
+   rest of the page on the dark stock, and a deep red on the ivory stock (5.5:1) */
+.site .ticket .ticket-kicker,
+.site .ticket .ticket-meta dt {
+  color: var(--error);
+}
+.site .ticket[data-mode="light"] .ticket-kicker,
+.site .ticket[data-mode="light"] .ticket-meta dt {
+  color: #c00000;
+}
+
+/* the section mark: a § in yellow gold with the same copper-and-verdigris patina as the Sell button.
+   The photo is clipped to the glyph, with gold laid over it so the yellow still leads. */
+.ds.site .sec-title {
+  gap: 14px;
+}
+.ds.site .sec-mark {
+  font-family: var(--f-heading); /* Cal Sans */
+  font-size: 0.62em; /* smaller than the heading, so it reads as a mark and not a letter */
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  background-image: linear-gradient(rgb(244 204 92 / 0.66), rgb(244 204 92 / 0.66)), url("/img/button-patina.webp");
+  background-size: 100% 100%, cover;
+  background-position: center;
+  -webkit-background-clip: text;
+  background-clip: text;
+  filter: drop-shadow(0 0 8px color-mix(in srgb, var(--accent) 40%, transparent));
+}
+
+/* Printed into the paper: the ticket's type picks up a faint uneven ink (a noise mask lets a little of the
+   paper show through), and a hairline pressed edge. The barcode is left crisp so it still scans. */
+.site .ticket {
+  --ink-noise: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n' x='0' y='0' width='100%' height='100%'><feTurbulence type='fractalNoise' baseFrequency='.6' numOctaves='2' seed='7' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -.3 1.08'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+.site .ticket .ticket-kicker,
+.site .ticket .ticket-title,
+.site .ticket .ticket-subs,
+.site .ticket .ticket-meta,
+.site .ticket .ticket-stub .t-label,
+.site .ticket .ticket-note {
+  -webkit-mask-image: var(--ink-noise);
+  mask-image: var(--ink-noise);
+  -webkit-mask-size: 240px 240px;
+  mask-size: 240px 240px;
+  /* dark stock: a darker edge above each letter and a faint lit edge below, like type pressed into card */
+  text-shadow: 0 -0.5px 0 rgb(0 0 0 / 0.5), 0 0.6px 0 rgb(255 255 255 / 0.07);
+}
+.site .ticket[data-mode="light"] .ticket-kicker,
+.site .ticket[data-mode="light"] .ticket-title,
+.site .ticket[data-mode="light"] .ticket-subs,
+.site .ticket[data-mode="light"] .ticket-meta,
+.site .ticket[data-mode="light"] .ticket-stub .t-label,
+.site .ticket[data-mode="light"] .ticket-note {
+  /* light stock: ink that has spread a hair into the fibres, and a pale edge where the paper was pressed in */
+  text-shadow: 0 0 0.7px currentColor, 0 0.8px 0 rgb(255 255 255 / 0.75);
+}
+
+/* DARK  [switch]  LIGHT: the paper that is showing is the brighter label */
+.site .mode-toggle {
+  gap: 12px;
+}
+.site .mode-label {
+  color: var(--muted);
+  cursor: pointer;
+  user-select: none;
+  transition: color 0.15s;
+}
+.site .mode-label:hover {
+  color: var(--text);
+}
+.site .mode-label.is-on {
+  color: var(--text);
+}
+
+/* all the fine print is set in the body face (DM Mono), the same as the note under Sell Tickets */
+.ds.site .hint,
+.ds.site .site-foot,
+.ds.site .site-foot > span,
+.ds.site .ticket .ticket-note,
+.ds.site .save-note {
+  font-family: var(--f-body);
+}
+.ds.site .hint {
+  font-weight: 400;
+  font-size: 12px;
+}
+.ds.site .site-foot {
+  font-weight: 500;
+}
+.ds.site .ticket .ticket-note {
+  font-weight: 400;
+  letter-spacing: 0.08em;
+}
+.ds.site .save-note {
+  font-weight: 500;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+}

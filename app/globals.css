@@ -1,0 +1,34 @@
+@import "tailwindcss";
+
+:root {
+  --paper: #ffffff;
+  --ink: #171717;
+  --muted: #5c5c5c;
+  --rule: #e3e3e3;
+  --pin: #d6405f;
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-rule: var(--rule);
+  --color-pin: var(--pin);
+  --font-display: var(--font-cal-sans);
+  --font-sans: var(--font-jetbrains-mono);
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans), ui-monospace, Menlo, monospace;
+}
+
+@layer base {
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display), Helvetica, Arial, sans-serif;
+    font-weight: 400;
+  }
+}
