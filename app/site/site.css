@@ -15,18 +15,19 @@
   pointer-events: none;
 }
 
-/* the page runs full height so the footer sits at the bottom even when the content is short */
+/* the page runs full height so the footer sits at the bottom even when the content is short.
+   Vertical spacing is kept tight so the whole page fits a 14-inch MacBook screen without scrolling. */
 .ds.site > .wrap {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  padding-bottom: 64px; /* breathing room under the footer line */
+  padding-bottom: 24px; /* breathing room under the footer line */
 }
 
 /* footer: small muted line, centred across the content column */
 .site .site-foot {
   margin-top: auto;
-  padding-top: 72px;
+  padding-top: 20px;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -68,16 +69,17 @@
 /* section titles: the big headings of the page */
 .ds.site .sec-title {
   gap: 16px;
-  margin-bottom: 28px;
-  padding-bottom: 14px;
-  font-size: clamp(32px, 4.2vw, 52px);
+  margin-bottom: 20px;
+  padding-bottom: 8px;
+  font-size: clamp(62px, calc(4.2vw + 30px), 82px);
+  line-height: 1; /* all caps: no descenders, so no spare leading above or below */
   letter-spacing: 0.06em;
 }
 
 
 /* page layout */
 .site .site-grid {
-  margin-top: 56px;
+  margin-top: 0; /* the section headings are the first thing on the page */
   display: grid;
   gap: 56px;
 }
@@ -90,6 +92,24 @@
   .site .site-preview {
     position: sticky;
     top: 24px;
+  }
+  /* The ticket column pins as a whole, so its TICKET heading never moves. The EVENT heading pins at the same
+     height, on the page colour, so the two headings stay level while the form scrolls up underneath it. */
+  .site .site-form .sec-title {
+    position: sticky;
+    top: 24px;
+    z-index: 5;
+    background: var(--bg);
+  }
+  /* fills the 24px strip above the pinned heading, so nothing scrolls through it */
+  .site .site-form .sec-title::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 100%;
+    height: 24px;
+    background: var(--bg);
   }
 }
 .site .site-form,
@@ -114,7 +134,7 @@
 /* form */
 .site .form-stack {
   display: grid;
-  gap: 24px;
+  gap: 16px;
 }
 .site .field {
   color-scheme: dark;
@@ -208,6 +228,21 @@
 .site .ticket-meta {
   margin-top: auto; /* date, time and price sit at the bottom of the ticket */
   padding-top: 16px;
+}
+/* the venue: one line of its own under date, time and price. Set in the label face (Josefin Sans), the one the
+   DATE, TIME and PRICE headers use: it is narrow enough that a typical "venue, street, city, zip" stays on one
+   line at full ticket width, where the mono body face would wrap. Only an unusually long address wraps. */
+.site .ticket-where {
+  flex-basis: 100%;
+  min-width: 0;
+}
+.ds.site .ticket .ticket-where dd {
+  font-family: var(--f-label);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
 }
 /* the whole stub (barcode, number, note) is one group, centred vertically on the ticket */
 .site .ticket-stub {
@@ -442,12 +477,6 @@
 .site .ticket[data-mode="light"] .ticket-stub .t-label,
 .site .ticket[data-mode="light"] .ticket-note {
   color: var(--text);
-}
-
-/* top row: just THE HUB, out of the way at the right */
-.site .site-top {
-  display: flex;
-  justify-content: flex-end;
 }
 
 /* a warning under the link panel: nothing is stored, so the band has to keep the link */

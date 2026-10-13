@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect, useId, useRef, useState } from "react";
 import { PressedChart } from "../../design-systems/_components/PressedChart";
 import { storywriter } from "@/lib/design-systems/themes";
@@ -13,7 +12,7 @@ import "../site.css";
 
 const MAX_ACTS = 5;
 type Status = "idle" | "loading" | "error" | "ready";
-type Field = "title" | "date" | "time" | "price" | "venmo";
+type Field = "title" | "date" | "time" | "price" | "location" | "venmo";
 
 // Venmo usernames are 5 to 30 letters, numbers, hyphens or underscores. A leading @ is fine.
 const VENMO = /^[A-Za-z0-9_-]{5,30}$/;
@@ -65,7 +64,7 @@ function EmbossArt({ source }: { source: HTMLCanvasElement }) {
   return <canvas ref={ref} className="ticket-art" aria-hidden width={source.width} height={source.height} />;
 }
 
-function Ticket(props: { title: string; acts: string[]; date: string; time: string; price: string; no: string; emboss: HTMLCanvasElement | null; light: boolean }) {
+function Ticket(props: { title: string; acts: string[]; date: string; time: string; price: string; location: string; no: string; emboss: HTMLCanvasElement | null; light: boolean }) {
   return (
     <article className="ticket" data-mode={props.light ? "light" : "dark"} aria-label={`Ticket preview: ${props.title}`}>
       <span className="paper" aria-hidden />
@@ -93,6 +92,13 @@ function Ticket(props: { title: string; acts: string[]; date: string; time: stri
             <dt className="t-label">Price</dt>
             <dd>{fmtPrice(props.price)}</dd>
           </div>
+          {/* the venue, as one line under the three columns above */}
+          {props.location && (
+            <div className="ticket-where">
+              <dt className="t-label sr-only">Location</dt>
+              <dd>{props.location}</dd>
+            </div>
+          )}
         </dl>
       </div>
       <div className="ticket-stub">
@@ -122,6 +128,7 @@ export function PapercutSite({ fontClass }: { fontClass: string }) {
   const [date, setDate] = useState("2026-11-21");
   const [time, setTime] = useState("19:00");
   const [price, setPrice] = useState("10");
+  const [location, setLocation] = useState("");
   const [venmo, setVenmo] = useState("");
 
   const [status, setStatus] = useState<Status>("idle");
@@ -145,8 +152,9 @@ export function PapercutSite({ fontClass }: { fontClass: string }) {
 
   const cleanTitle = title.trim();
   const cleanActs = acts.map((a) => a.trim()).filter(Boolean);
+  const cleanLocation = location.trim();
   // the ticket number follows the ticket itself; the checkout link also follows where the money goes
-  const ticketSig = JSON.stringify([cleanTitle, cleanActs, date, time, price.trim(), image?.key ?? ""]);
+  const ticketSig = JSON.stringify([cleanTitle, cleanActs, date, time, price.trim(), cleanLocation, image?.key ?? ""]);
   const signature = JSON.stringify([ticketSig, cleanHandle(venmo).toLowerCase()]);
   const ticketNo = String(hash(ticketSig) % 100000000).padStart(8, "0");
   const link = `https://buy.stripe.com/test_${hash(signature).toString(36)}${hash(signature + "x").toString(36)}`;
@@ -269,13 +277,8 @@ export function PapercutSite({ fontClass }: { fontClass: string }) {
   return (
     <div className={`ds ds-storywriter site ${fontClass}`} style={rootVars(storywriter)}>
       <div className="wrap">
-        <header className="site-top">
-          {/* no visible title; the page still needs a heading for screen readers */}
-          <h1 className="sr-only">Papercut Tickets</h1>
-          <Link href="/" className="back">
-            ← THE HUB
-          </Link>
-        </header>
+        {/* no visible title; the page still needs a heading for screen readers */}
+        <h1 className="sr-only">Papercut Tickets</h1>
 
         <div className="site-grid">
           {/* ---------- 1. form ---------- */}
@@ -384,6 +387,20 @@ export function PapercutSite({ fontClass }: { fontClass: string }) {
                 </label>
               </div>
 
+              <label className="field-wrap">
+                <span className="t-label">Location</span>
+                <input
+                  {...fieldProps("location")}
+                  className="field"
+                  type="text"
+                  value={location}
+                  maxLength={100}
+                  placeholder="Venue Name, Address, City, Zipcode."
+                  autoComplete="off"
+                  onChange={(e) => setLocation(e.target.value)}
+                />
+              </label>
+
               <div className="image-field">
                 <label
                   className={`upload${dragging ? " is-drag" : ""}${image ? " has-image" : ""}`}
@@ -479,7 +496,7 @@ export function PapercutSite({ fontClass }: { fontClass: string }) {
             </h2>
 
             {cleanTitle ? (
-              <Ticket title={cleanTitle} acts={cleanActs} date={date} time={time} price={price} no={ticketNo} emboss={emboss} light={lightTicket} />
+              <Ticket title={cleanTitle} acts={cleanActs} date={date} time={time} price={price} location={cleanLocation} no={ticketNo} emboss={emboss} light={lightTicket} />
             ) : (
               <section className="ui-state empty" aria-label="Empty ticket">
                 <svg width="36" height="36" viewBox="0 0 36 36" fill="none" aria-hidden>
