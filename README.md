@@ -10,7 +10,7 @@ The output/product is a unique link and checkout page for their event, which the
 The performer could also create print material such as event posters with QR codes that link to the checkout page. 
 
 When a potential show goer clicks the link posted by the performer, they land on a page with a basic and simple checkout. 
-After successful checkout the ticket they purchased is emailed to them. They are responsible for keeping track of the ticket as their is no login - just like irl. 
+After successful checkout the ticket they purchased is emailed to them. They are responsible for keeping track of the ticket as there is no login or database - just like irl. 
 
 --
 
