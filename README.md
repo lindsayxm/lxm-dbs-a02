@@ -24,16 +24,25 @@ I attempted to recreate that effect on the ticket itself, giving it a more "real
 I also implemented an image upload cell on the event creation section. 
 This allows the performer to add their own embossed logo or image to the ticket they are selling - a personalization touch which is unique and memorable. 
 
-I also attempted a match font from the book's spine as the header font, but in the end it didn't work and made the page feel less clean... somehow it just didn't feel "right".
+I also attempted to match the font from the book's spine as the header font, but in the end it didn't work and made the page feel less clean... somehow it just didn't feel "right".
 
 In addition the following criteria needed to be met: 
+
   **Visual hierarchy**: it's clear what to look at first.
+  
   **Type**: a few sizes and weights, used the same way throughout, and text that's comfortable to read.
+  
   **Color**: a small palette where each color has a purpose.
+  
   **Accessibility**: text contrast is legible.
-  Layout: elements are aligned intentionally, related elements are grouped, and it works on desktop
+  
+  **Layout**: elements are aligned intentionally, related elements are grouped, and it works on desktop
   and mobile.
+  
   **Affordances**: interactions are obvious.
+  
   **States**: controls respond when you hover, focus, or press them.
+  
   **Visual style**: it looks like the style you picked, not the agent's default.
+  
   **Simplicity**: nothing extra. If a word or an image doesn't help, remove it.
