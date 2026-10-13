@@ -2,9 +2,9 @@ This is a ticket selling app for indie performers. Existing ticketing platforms 
 
 The goal is to create a simple interface where users can create tickets for their shows/events that:
   - Are held in private, underground, or smaller venues
-  - Offers a platform without undue charges or unwarrented fees 
-  - Doesn't require joining something or being a member/paying for subscription 
-  - Is not a complicated mess
+  - Offers a platform without undue charges or unwarrented fees  (DICE, Ticket Fuze, Eventbite etc.) 
+  - Doesn't require joining something or being a member/paying for subscription (Sofar, Meetup, Bandana, etc.)
+  - Is not a complicated mess (all of the above + all others) 
 
 The output/product is a unique link and checkout page for their event, which they can post on their existing social media, streaming service, or website. 
 The performer could also create print material such as event posters with QR codes that link to the checkout page. 
@@ -26,7 +26,7 @@ This allows the performer to add their own embossed logo or image to the ticket 
 
 I also attempted to match the font from the book's spine as the header font, but in the end it didn't work and made the page feel less clean... somehow it just didn't feel "right".
 
-In addition the following criteria needed to be met: 
+In addition, the following criteria needed to be met: 
 
   **Visual hierarchy**: it's clear what to look at first.
   
