@@ -19,10 +19,12 @@ After successful checkout the ticket they purchased is emailed to them. They are
 I chose the final Design System "Storyteller", as I felt it had a modern edge but still contained notes or warmth, luxury, and callback to vintage aesthetic; 
 from a time when form mattered as much as function. 
 
-A particularly interesting aspect was how the imprinted gold leaf on a book cover might translate onto the ticket design. 
+A particularly interesting aspect was how the imprinted gold leaf on a book cover inspired the ticket design. 
 I attempted to recreate that effect on the ticket itself, giving it a more "real" look, using paper texture overlays, and adding emboss to both text and image. 
 I also implemented an image upload cell on the event creation section. 
 This allows the performer to add their own embossed logo or image to the ticket they are selling - a personalization touch which is unique and memorable. 
+
+I also attempted a match font from the book's spine as the header font, but in the end it didn't work and made the page feel less clean... somehow it just didn't feel "right".
 
 In addition the following criteria needed to be met: 
   **Visual hierarchy**: it's clear what to look at first.
