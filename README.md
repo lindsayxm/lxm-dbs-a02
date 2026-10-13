@@ -12,6 +12,10 @@ The performer could also create print material such as event posters with QR cod
 When a potential show goer clicks the link posted by the performer, they land on a page with a basic and simple checkout. 
 After successful checkout the ticket they purchased is emailed to them. They are responsible for keeping track of the ticket as there is no login or database - just like irl. 
 
+Payouts are handled via venmo or paypal - no complicated bank linking or onboarding barriers.
+
+Event organizers are responsible for taxes or other reporting requirements. 
+
 --
 
 ---- **D E S I G N** ----
