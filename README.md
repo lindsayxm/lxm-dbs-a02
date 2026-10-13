@@ -19,7 +19,7 @@ Event organizers are responsible for taxes or other reporting requirements.
 
 ---- **D E S I G N** ----
 
-I chose the final Design System "Storyteller", as I felt it had a modern edge but still contained notes or warmth, luxury, and callback to vintage aesthetic; 
+I chose the final Design System "Storyteller", as I felt it had a modern edge but still contained notes of warmth and callback to vintage aesthetic; 
 from a time when form mattered as much as function. 
 
 A particularly interesting aspect was how the imprinted gold leaf on a book cover inspired the ticket design. 
