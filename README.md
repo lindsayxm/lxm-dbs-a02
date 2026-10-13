@@ -16,7 +16,6 @@ Payouts are handled via venmo or paypal - no complicated bank linking or onboard
 
 Event organizers are responsible for taxes or other reporting requirements. 
 
---
 
 ---- **D E S I G N** ----
 
